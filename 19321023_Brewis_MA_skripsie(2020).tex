@@ -9,15 +9,23 @@
 \usepackage{hyperref}
 \usepackage{nameref}
 \usepackage{xcolor}
+\usepackage{etoolbox}
+\usepackage{blindtext}
 \usepackage{tocloft}
+\usepackage{textcomp}
 \usepackage{caption}
 \graphicspath{{fig/}}
 
-%This will cause your sections/chapters/subsections to be numbered or not play artound 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%This will cause your sections/chapters/subsections to be numbered or not play artound 
 \setcounter{secnumdepth}{2}
 \setlength{\cftbeforetoctitleskip}{0em}
 \setlength{\cftbeforeloftitleskip}{0em}\setlength{\cftbeforelottitleskip}{0em}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %This simply makes it sotaht there is not a large margin at the top of a new page
@@ -46,30 +54,48 @@
 \makeatother
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%playing around with vustom klists%%%%%%%%%%%%%%%%
-%\newcommand{\listsymbolsname}{List of Symbols}
-%\newcommand{\listabbreviationname}{List of Abbreviations}
-%
-%\newlistof{symbol}{sym}{\listsymbolsname}
-%
-%\newcommand{\msymb}[1]{%
-%\refstepcounter{symbol}\thesymbol
-%\addcontentsline{sym}{symbol}
-%{\protect\numberline{\thechapter.\thesymbol}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%This makes the list of symbol and abbreviations also have a nice dot fill%%%%%%%%%%%%%%%%%
 \makeatletter
 \newcommand \Dotfill {\leavevmode \cleaders \hb@xt@ .80em{\hss .\hss }\hfill \kern \z@}
 \makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%renames the title of bibiliography%%%%%%%%%%%%%%%
 \renewcommand{\bibname}{References}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%This allows text to be added to the Part heading of documents%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
 
+\let\LaTeXStandardPart\part%
+\newcommand{\unstarredpart@@noopt}[1]{%
+  \unstarredpart@@opt[#1]{#1}%
+}%
 
+\newcommand{\unstarredpart@@opt}[2][]{%
+  \cleardoublepage% (For clearing content before!!!)
+  \begingroup%
+  \let\newpage\relax%
+  \LaTeXStandardPart[#1]{#2}%
+  \endgroup%
+}%
 
+\newcommand{\starredpart}[1]{%
+  \LaTeXStandardPart*{#1}%
+}%
+
+\newcommand{\unstarredpart}{%
+  \@ifnextchar[{\unstarredpart@@opt}{\unstarredpart@@noopt}%
+}%
+
+\renewcommand{\part}{%
+  \@ifstar{\starredpart}{\unstarredpart}%
+}%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%this removes indetation from the first line of a paragraph%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parindent}{0pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 \begin{document}
@@ -83,7 +109,9 @@
 \input{tex/lists}\newpage\cleardoublepage
 \pagenumbering{arabic}
 \input{tex/intro}\newpage\cleardoublepage
-\input{tex/sampleChapter}\newpage\cleardoublepage
+\input{tex/part1}
+\input{tex/part2}
+\input{tex/part3}
 \input{tex/bib}
 \input{tex/A}
 \input{tex/B}
