@@ -1,0 +1,92 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{titlesec} 
+\usepackage{lipsum}  
+\usepackage{hyperref}
+\usepackage{nameref}
+\usepackage{xcolor}
+\usepackage{tocloft}
+\usepackage{caption}
+\graphicspath{{fig/}}
+
+%This will cause your sections/chapters/subsections to be numbered or not play artound 
+\setcounter{secnumdepth}{2}
+\setlength{\cftbeforetoctitleskip}{0em}
+\setlength{\cftbeforeloftitleskip}{0em}\setlength{\cftbeforelottitleskip}{0em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%This simply makes it sotaht there is not a large margin at the top of a new page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewcommand*\@makechapterhead[1]{%
+   %\vspace*{50\p@}%
+   {\parindent \z@ \raggedright \normalfont
+     \ifnum \c@secnumdepth >\m@ne
+         \huge\bfseries \@chapapp\space \thechapter
+         \par\nobreak
+         \vskip 20\p@
+     \fi
+     \interlinepenalty\@M
+     \Huge \bfseries #1\par\nobreak
+     \vskip 40\p@
+   }}
+\renewcommand*\@makeschapterhead[1]{%
+   %\vspace*{50\p@}%
+   {\parindent \z@ \raggedright
+     \normalfont
+     \interlinepenalty\@M
+     \Huge \bfseries  #1\par\nobreak
+     \vskip 40\p@
+   }}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%playing around with vustom klists%%%%%%%%%%%%%%%%
+%\newcommand{\listsymbolsname}{List of Symbols}
+%\newcommand{\listabbreviationname}{List of Abbreviations}
+%
+%\newlistof{symbol}{sym}{\listsymbolsname}
+%
+%\newcommand{\msymb}[1]{%
+%\refstepcounter{symbol}\thesymbol
+%\addcontentsline{sym}{symbol}
+%{\protect\numberline{\thechapter.\thesymbol}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\makeatletter
+\newcommand \Dotfill {\leavevmode \cleaders \hb@xt@ .80em{\hss .\hss }\hfill \kern \z@}
+\makeatother
+
+\renewcommand{\bibname}{References}
+
+
+
+
+
+
+\begin{document}
+\pagenumbering{Roman}
+\input{tex/title}\newpage\cleardoublepage
+\input{tex/ack}
+\input{tex/plag}\newpage\cleardoublepage
+\input{tex/sum}\newpage\cleardoublepage
+\tableofcontents
+\newpage\cleardoublepage
+\input{tex/lists}\newpage\cleardoublepage
+\pagenumbering{arabic}
+\input{tex/intro}\newpage\cleardoublepage
+\input{tex/sampleChapter}\newpage\cleardoublepage
+\input{tex/bib}
+\input{tex/A}
+\input{tex/B}
+\input{tex/C}
+\end{document}
+
