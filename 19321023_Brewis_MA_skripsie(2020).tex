@@ -13,8 +13,11 @@
 \usepackage{blindtext}
 \usepackage{tocloft}
 \usepackage{textcomp}
+\usepackage{url}
 \usepackage{caption}
 \graphicspath{{fig/}}
+\usepackage{chngcntr}
+\counterwithout{table}{chapter}
 
 
 
@@ -109,11 +112,15 @@
 \input{tex/lists}\newpage\cleardoublepage
 \pagenumbering{arabic}
 \input{tex/intro}\newpage\cleardoublepage
-\input{tex/sampleChapter}\newpage\cleardoublepage
-\input{tex/conc}
+\input{tex/emulatorInvestigation}\newpage\cleardoublepage
+\input{tex/systemDesign}\newpage\cleardoublepage
+\input{tex/detailedDesign}\newpage\cleardoublepage
+\input{tex/results}\newpage\cleardoublepage
+\input{tex/conclusion}\newpage\cleardoublepage
 \input{tex/bib}
 \input{tex/A}
 \input{tex/B}
 \input{tex/C}
+\input{tex/D}
 \end{document}
 
