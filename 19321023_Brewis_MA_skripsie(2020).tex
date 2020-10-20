@@ -18,7 +18,45 @@
 \graphicspath{{fig/}}
 \usepackage{chngcntr}
 \counterwithout{table}{chapter}
+\usepackage{adjustbox}
+\usepackage{listings}
 
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{DOS}
+{
+    backgroundcolor=\color{black},
+    basicstyle=\scriptsize\color{white}\ttfamily
+    keywordstyle=\color{black},
+    keywords={WARN},
+}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\newcommand\purl[1]{\protect\url{#1}}
 
 
 
@@ -122,5 +160,7 @@
 \input{tex/B}
 \input{tex/C}
 \input{tex/D}
+\input{tex/E}
+
 \end{document}
 
