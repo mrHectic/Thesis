@@ -1,3 +1,4 @@
+
 # begin importing of standard modules
 import re
 import random
@@ -69,11 +70,9 @@ findDrivers2(filepath) #This is the recursive function that does the work
 
 # begin setting the dataframe to display well
 pd.set_option('max_colwidth', 200)
-df.drop(columns ='Unnamed: 0')
 # end setting the dataframe to display well
 
 # begin saving the dataframe into the csv file again
 os.chdir(mypath.data)
-df.to_csv('data.csv')
+df.to_csv('data.csv', index = False)
 # end saving the dataframe into the csv file again
-

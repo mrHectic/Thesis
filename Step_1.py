@@ -13,17 +13,21 @@ import sys
 # begin setting of home path variable and adding data directory to path import list
 if 'Step_1.ipynb' or 'Step_1.py' or 'Step_1.exe' in os.listdir():
     home = os.getcwd()     
-sys.path.append(os.path.join(home, 'data')) #This will add the data folder to 
-# the path variable so modules can be imported 
+sys.path.append(os.path.join(home, 'data')) #This will add the data folder to the path variable so modules can be imported 
 # end setting of home path variable and adding data directory to path import list
 
 # begin importing of path module
 try:
     os.chdir('data')
+#     yes = input('#3 \n') #This was used to debug code
     import mypath
 except FileNotFoundError:
+#     yes = input('#4 \n') #This was used to debug code
+#     print('The data directory does not exist yet')
     pass
 except ModuleNotFoundError:
+#     yes = input('#5 \n') #This was used to debug code
+#     print('The module mypath.py does not exist')
     pass
 # end importing of path module
 
@@ -39,7 +43,7 @@ try:
     fileObj.close()
     import mypath
 except FileExistsError:
-     print('The data dir already exists and cannot be made')
+#     print('The data dir already exists and cannot be made')
     pass
 # end creation of path module nad data directory
 
@@ -84,6 +88,7 @@ os.chdir(mypath.repos)
 newList = list(filter(rg.findall, os.listdir()))
 os.chdir(mypath.home)
 # end creation of list with all student numbers in path.repos folder
+
 # begin checking that there is nothing else in the stdRepos directory but valid folders
 os.chdir(mypath.repos)
 invalidFiles = []
@@ -131,12 +136,13 @@ if newList: # This will check that there is actually something in the stdRepos f
 try:
     os.chdir(mypath.data)
     import ds
+#     yes = input('Student numbers detected and subsequent hash codes created and linked! \n') #This was used to debug code
     dictStd = ds.dictStd
 except ModuleNotFoundError:
-    yes = input(''''#Error 3.2: import ds did not work module not found 
-    Make sure there is a valid student repository in the stdRepos folder and that it is unzipped! 
-    Then run Step_1 again''') #This was used to debug code
+#     print('import ds did not work')
+    yes = input('#Error 3.2: import ds did not work module not found \nMake sure there is a valid student repository in the stdRepos folder and that it is unzipped! \nThen run Step_1 again') #This was used to debug code
 except FileNotFoundError:
+#     print('data directory does not exist yet')
     yes = input('#Error 3.3: data directory does not exist yet\n') #This was used to debug code
 # end creation of ds module containing all the student numbers 
 
@@ -144,7 +150,9 @@ except FileNotFoundError:
 try:
     df = pd.DataFrame(ds.dictStd.items())
     df.rename(columns={0: "std", 1: "hsh"}, inplace = True)
+#     yes = input('dataframe was created\n') #This was used to debug code
 except NameError:
+#     yes = input('#Error 4.1: Name Error\n') #This was used to debug code
     pass
 #end the creation of a data frame from the dictionery
 
@@ -177,7 +185,7 @@ for x , i in enumerate (os.listdir()):
 
 # begin storing data frame
 os.chdir(mypath.data)
-df.to_csv('data.csv')
+df.to_csv('data.csv', index = False)
 input('''Success!!!
  
 All the folders have been renamed according to hash codes and a csv has been created in the data directory
@@ -186,3 +194,4 @@ You can now run Step_2!!
 
 Press any key to exit...''')
 # end storing data frame
+

@@ -16,7 +16,7 @@ This section aims to compare the various solutions available when it comes to th
 \label{emuVsSim}
 To address the problem adequately, one instruction set must be emulated on a platform compatible only with another instruction set. In this case, C code written for ARM architectures must be emulated on a \hyperref[listAbr]{PC} using CISC instruction sets.
 \\\\
-To achieve this, an ARM machine must be virtually created on the host machine. This can be done either through emulation or simulation. Emulation aims to mimic the target architecture (ARM) as closely as possible on the host platform (x86 Intel/AMD) at the cost of simplicity. It also provides a much less general, more platform dependent solution. In contrast, simulation aims to duplicate only high-level behaviour and is not very specific. It is not suitable for high fidelity application \cite{Chris}. The table below illustrates some key comparisons.
+To achieve this, an ARM machine must be virtually created on the host machine. This can be done either through emulation or simulation. Emulation aims to mimic the target architecture (ARM) as closely as possible on the host platform (x86 Intel/AMD) at the cost of increased complexity. It also provides a much less general, more platform dependent solution. In contrast, simulation aims to duplicate only high-level behaviour and is not very specific. It is not suitable for high fidelity application \cite{Chris}. The table below illustrates some key comparisons.
 
 \begin{table}[H]
 \begin{tabular}{ |c|c|c| } 
@@ -34,15 +34,15 @@ To achieve this, an ARM machine must be virtually created on the host machine. T
 \label{emVsim}
 \end{table}
 
-Table~\ref{emVsim} illustrates the key differences in emulation and simulation and the suitability of each. As can be seen, high fidelity and operation close to real time. Only emulators are suitable. Furthermore, because behaviour is indeed being recreated and the scope has been narrowed as per \textbf{1.4 \nameref{scOfWrk}}, a simulator is not warranted. 
+Table~\ref{emVsim} illustrates the key differences in emulation and simulation and the suitability of each. As can be seen, for high fidelity and operation close to real time, only emulators are suitable. Furthermore, because behaviour is indeed being recreated and the scope has been narrowed as per \textbf{1.4 \nameref{scOfWrk}}, a simulator is not warranted. 
 \\\\
 It therefore becomes the goal of this investigation to find a suitable emulator for the task at hand. In the following sections emulators will be investigated. It will become apparent that these solutions are extremely specific in most cases and target a small range of \hyperref[listAbr]{MCU}s only. The choice of emulator is therefore extremely important and is precursor to automating any code evaluation.
 
 \subsection{GXemul}
 \label{GXemul}
-The first emulator under investigation is GXemul. It is promising in that some machines using ARM processors have been emulated within its framework. Furthermore, the project is completely open-source. \cite{Gavare}
+The first emulator under investigation is GXemul. It is promising, in that some machines using ARM processors have been emulated within its framework. Furthermore, the project is completely open-source. \cite{Gavare}
 \\\\
-GXemul is suitable for low-level programming courses as well as operating system courses and aims to be a learning tool more than anything else. Its framework revolves around specific machines mentioned in the pertaining documentation \cite{Gavare} \cite{gavareEmail}. Since the specific \hyperref[listAbr]{ARM} boards used in the engineering modules of importance are not supported (No Arduino or STM32 MCU support), the source-code would need to be altered to support the MCU. It is far beyond the scope of this project to code an emulators basic functioning, but it is indeed interesting that it can, theoretically be done in GXemul.
+GXemul is suitable for low-level programming courses as well as operating system courses and aims to be a learning tool more than anything else. Its framework revolves around specific machines mentioned in the pertaining documentation \cite{Gavare}\cite{gavareEmail}. Since the specific \hyperref[listAbr]{ARM} boards used in the engineering modules of importance are not supported (No Arduino or STM32 MCU support), the source-code would need to be altered to support the MCU. It is far beyond the scope of this project to code an emulators basic functioning, but it is indeed interesting that it can, theoretically, be done in GXemul.
 \\\\
 Email correspondence with Anders Gavare (the creator of GXemul) confirmed many of the aforementioned observation and additionally provided insight into a further limitation of GXemul: It prefers host operating systems Linux and FreeBSD. Although emulation on other operating systems are indeed possible, they are not explicitly supported \cite{gavareEmail}. This makes GXemul non-ideal for the purposes of this project. It is ultimately too specific, educationally focused and lacks support for the most common platforms.
  
@@ -52,7 +52,7 @@ OVPsim provides emulation of various target architectures on multiple host platf
 \\\\
 In contrast to GXemul, OVPsim is widely used on the most popular \hyperref[listAbr]{OS}s. This makes it suitable for the problem at hand, due to the scope being limited to Windows \hyperref[listAbr]{PC}s (with support for Linux, taking an important caveat into account)(see \textbf{1.4 \nameref{scOfWrk}}).
 \\\\
-Even though OVPsim seems to be suitable, very little documentation can be found regarding the process of implementing a target architecture on it. The team behind the project are not available for communication and internet forums are largely devoid of any information regarding this particular emulator. 
+	Even though OVPsim seems to be suitable, very little documentation can be found regarding the process of implementing a target architecture on it. The team behind the project are not available for communication and internet forums are largely devoid of any information regarding this particular emulator. 
 \\\\
 A disconnect thus exists between the suitability of this emulator and the usability of it. A solution might be possible using OVPsim but there is no clear path to that solution. Further investigation into alternative emulator solutions are thus warranted.
 
@@ -62,9 +62,9 @@ QEMU is a full-system emulator. It is an ubiquitous solution when it comes to \h
 \\\\
 Furthermore, QEMU supports two specific \hyperref[listAbr]{ARM} Cortex-M4  \hyperref[listAbr]{MCU}s, namely the Stellaris LM3S811EVB and the Stellaris LM3S6965EVB. This makes it a very promising option, as two specific Cortex-M4 \hyperref[listAbr]{MCU}s are fully supported in terms of functionality \cite{QEMU}\cite{QEMUarm}. The previously investigated emulators, in contrast, had very little support in terms of full \hyperref[listAbr]{MCU} recreation and offered only partial solutions.
 \\\\
-QEMU is furthermore, a cross-platform project and therefore supports (and will continue to support for the foreseeable future) Windows \hyperref[listAbr]{PC}s. This makes it viable with the narrowing of the project scope occurring in \textbf{1.4 \nameref{scOfWrk}}. 
+QEMU is, furthermore, a cross-platform project and therefore supports (and will continue to support for the foreseeable future) Windows \hyperref[listAbr]{PC}s. This makes it viable with the narrowing of the project scope occurring in \textbf{1.4 \nameref{scOfWrk}}. 
 \\\\
-It is important to note that the two ARM Cortex-M series \hyperref[listAbr]{MCU}s supported by the QEMU project are not boards usually used in the pertaining engineering modules mentioned earlier. These two boards are not aimed at low-power applications and are suited more for industrial applications than educational ones \cite{TexasInstruments2014}. Furthermore, the two boards supported by the QEMU emulator are outdated and have been superseded by the manufacturer. It becomes apparent that the QEMU emulator, in its current state, is not ideal for the purposes of this project. Indeed an emulator that supports STM32s (the \hyperref[listAbr]{MCU}s preferred for use in the pertaining engineering modules) would be preferable. Due to the fact that QEMU is open-source, it can be investigated whether these STM32 \hyperref[listAbr]{MCU}s have been implemented in projects built within the QEMU framework.
+It is important to note that the two ARM Cortex-M series \hyperref[listAbr]{MCU}s supported by the QEMU project are not boards usually used in the pertaining engineering modules mentioned earlier. These two boards are not aimed at low-power applications and are suited more for industrial applications than educational ones \cite{TexasInstruments2014}. Furthermore, the two boards supported by the QEMU emulator are outdated and have been declared obsolete by the manufacturer. It becomes apparent that the QEMU emulator, in its current state, is not ideal for the purposes of this project. Indeed an emulator that supports STM32s (the \hyperref[listAbr]{MCU}s preferred for use in the pertaining engineering modules) would be preferable. Due to the fact that QEMU is open-source, it can be investigated whether these STM32 \hyperref[listAbr]{MCU}s have been implemented in projects built within the QEMU framework.
 
 \subsection{The xPack QEMU Arm project}
 \label{xpack}
@@ -105,7 +105,7 @@ With planned future support for the following STM32 boards of interest \cite{xPa
 
 Although the real-world \hyperref[listAbr]{MCU}s within the scope of this project (STM32F411E and STM32F334R8-Nucleo) are not yet supported, it seems that the xPack Project provides the closest possible complete solution when it comes to emulating these \hyperref[listAbr]{MCU}s.
 \\\\
-Moreover, the The xPack QEMU Arm project is cross-platform and can thus be implemented on Windows as well as Linux \hyperref[listAbr]{PC}s. It lastly and very importantly is supported as a plug-in for a very common \hyperref[listAbr]{IDE}: Eclipse.
+Moreover, the The xPack QEMU Arm project is cross-platform and can thus be implemented on Windows as well as Linux \hyperref[listAbr]{PC}s. It lastly (and very importantly) is supported as a plug-in for a very common \hyperref[listAbr]{IDE}: Eclipse.
 
 \newpage\cleardoublepage
 \subsection{Emulator comparison}
@@ -149,17 +149,17 @@ It is important to compare the key features provided by each emulator investigat
 	\end{table}
 \end{center}
 
-Table~\ref{emComp} illustrates the key feature of each emulator. It can be seen  that, of the investigated emulators, xPack QEMU Arm is the most suitable. This is mostly due to its cross-platform nature, its support for ARM Cortex-M3/4, its further support for the STM32 range of \hyperref[listAbr]{MCU}s and the level of support provided by its developer. xPack QEMU Arm is thus the emulator chosen to replicate real-world functionality, thereby providing an autonomous solution to evaluating various C code for ARM processors of the STM32 range.
+Table~\ref{emComp} illustrates the key features of each emulator. It can be seen  that, of the investigated emulators, xPack QEMU Arm is the most suitable. This is mostly due to its cross-platform nature, its support for ARM Cortex-M3/4, its further support for the STM32 range of \hyperref[listAbr]{MCU}s and the level of support provided by its developer. xPack QEMU Arm is thus the emulator chosen to replicate real-world functionality, thereby providing an autonomous solution to evaluating various C code for ARM processors of the STM32 range.
 
 \section{Implementing the chosen solution}
 \label{CompSolu}
 It has now been established that the xPack QEMU Arm project will be used as the emulator on which basic \hyperref[listAbr]{MCU} functionality will be replicated. This section will explore the process by which the functionality of a real-world \hyperref[listAbr]{MCU} can be replicated using the xPack QEMU Arm project. It is recommended that the Eclipse Embedded \hyperref[listAbr]{CDT} be used in conjunction with the xPack Project for the full utilization of the emulator \cite{emailIl}.
 \\\\
-The following section will detail the process by which functionality can be recreated in the emulated environment, utilizing code created in STM32CubeIDE for the real-world \hyperref[listAbr]{MCU}, which is the target of emulation. The functionality to be replicated in the emulator will be programmed completely in STM32CubeIDE and tested on a real-world \hyperref[listAbr]{MCU} before the emulation process is outlined. The real-world \hyperref[listAbr]{MCU}s available are mentioned in \textbf{\ref{xpack} \nameref{xpack}}.
+The following section will detail the process by which functionality can be recreated in the emulated environment, utilizing code created in STM32CubeIDE for the real-world \hyperref[listAbr]{MCU}, which is the target of emulation. The functionality to be replicated in the emulator will be programmed completely in STM32CubeIDE and tested on a real-world \hyperref[listAbr]{MCU} before the emulation result is outlined in \textbf{\nameref{results}}. The real-world \hyperref[listAbr]{MCU}s available are mentioned in \textbf{\ref{xpack} \nameref{xpack}}.
 
 \subsection{Dependencies}
 \label{dependencies}
-For xPack QEMU Arm emulator to work, various pre-requisites need to be met. It has previously been  indicated that Eclipse Embedded \hyperref[listAbr]{CDT} will be used as an environment for emulation. This is per the developer of the xPack QEMU Arm projects recommendation. Eclipse Embedded \hyperref[listAbr]{CDT} ensures full compatibility of the debugger, facilitates code manipulation and ensures a tried and tested solution is being implemented.
+For xPack QEMU Arm emulator to work, various pre-requisites need to be met. It has previously been  indicated that Eclipse Embedded \hyperref[listAbr]{CDT} will be used as an environment for emulation. This is per the developer of the xPack QEMU Arm projects recommendation \cite{emailIl}. Eclipse Embedded \hyperref[listAbr]{CDT} ensures full compatibility of the debugger, facilitates code manipulation and ensures a tried and tested solution is being implemented.
 \\\\
 The first dependency is thus an installation of the Eclipse Embedded \hyperref[listAbr]{CDT}. For Eclipse Embedded \hyperref[listAbr]{CDT} to work as expected further dependencies need to be met and are outlined subsequently. Lastly as mentioned in \textbf{\ref{scOfWrk} \nameref{scOfWrk}}, the installation process will only be outlined for Windows \hyperref[listAbr]{PC}s.
 
