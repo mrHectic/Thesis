@@ -52,19 +52,19 @@ STM32CubeIDE has a very particular project structure consisting of various direc
 \end{center}
 \end{figure}
 
-Figure~\ref{stmProj} illustrates the default STM32CubeIDE project outline. It can be seen that any valid project contains a Core folder. This folder contains all the relevant C code and included libraries. It is this folder that is of relevance. The project illustrated above was created in STM32CubeIDE to blink an LED on an STM32F411 \hyperref[listAbr]{MCU}. It is, however, not part of the repositories sent by Dr A Barnard. These repositories are, in fact, not depicted in order to maintain student anonymity. 
+Figure~\ref{stmProj} illustrates the default STM32CubeIDE project outline. It can be seen that any valid project contains a "Core" folder. This folder contains all the relevant C code and included libraries. It is this folder that is of relevance. The project illustrated above was created in STM32CubeIDE to blink an LED on an STM32F411 \hyperref[listAbr]{MCU}. It is, however, not part of the repositories sent by Dr A Barnard. These repositories are, in fact, not depicted in order to maintain student anonymity. 
 \\\\
 Anonymity is indeed a very important part of the automation process, when it comes to evaluating student code. Once access to the repositories have been gained, it becomes necessary to remove student numbers from folder and file names. The ethical reason for this is twofold. Firstly, students submit their respective repositories without opting into its use as part of this project. Secondly, this project does not aim to identify cases of plagiarism. If a case of plagiarism is identified as a side effect of the autonomous system, it is vital that these cases cannot be traced back to students.
 \\\\
-It can be seen that there is only one input to the relevant python script. This input is all the relevant student directories. How the autonomous system identifies these repositories and interacts with them will be discussed in \textbf{\nameref{4detailedd}}
+It can be seen that there is only one input to the relevant python script. This input is all the relevant student repositories. How the autonomous system identifies these repositories and interacts with them will be discussed in \textbf{\nameref{4detailedd}}.
 \\\\
-It can be observed from Figure~\ref{aso}, that the python script which ensures anonymity has three outputs. The first output is another python script called ds\hyperref[listExt]{.py} which stores the unique identifier associated with a specific student number. As a result the ds\hyperref[listExt]{.py} file generated can be imported by second executions of this program in order to populate the needed data frame. A second file, namely mypath\hyperref[listExt]{.py}, is also generated. This file is used to store the absolute path of certain directories and files within the project root directory and will be discussed in greater detail in \textbf{\nameref{4detailedd}}. Lastly, the third output is the data\hyperref[listExt]{.csv} file. It is generated within the first script and populated using the ds\hyperref[listExt]{.py} module.
+It can be observed from Figure~\ref{aso}, that the python script which ensures anonymity has three outputs. The first output is another python script called ds\hyperref[listExt]{.py} which stores random unique identifiers associated with specific student numbers. As a result the ds\hyperref[listExt]{.py} file generated can be imported by second executions of this program in order to populate the needed Pandas Data Frame. A second file, namely mypath\hyperref[listExt]{.py}, is also generated. This file is used to store the absolute path of certain directories and files within the project root directory and will be discussed in greater detail in \textbf{\nameref{4detailedd}}. Lastly, the third output is the data\hyperref[listExt]{.csv} file. It is generated within the first script and populated using the ds\hyperref[listExt]{.py} module.
 
 \subsection{Python program to identify path to project directories}
 \label{p2}
 Once the needed outputs, from the first program, as per Figure~\ref{aso} have been generated, a python program is needed to save the absolute path to the relevant folder within each student repository. This will ensure that the python programs work on any PC and are not relative to the folder hierarchies of the host machine. The absolute path to the needed folders will indeed serve as input to the rest of the programs in the autonomous system depicted in Figure~\ref{aso}.
 \\\\
-Although it is not immediately apparent that this functional block is prominent enough to be conceptualized as a separate program, this is not the case. The identification of the relevant folder (and contained files) is a cardinal step in the autonomous system. This is because students often submit their projects in such a way, that the project folder is nested within various parent directories. If the rest of the autonomous system is to function correctly, the correct directory must be identified and its absolute path stored. Moreover, the aforementioned functionality should be maintained regardless of multiple nested directories.
+Although it is not immediately apparent that this functional block is prominent enough to be conceptualized as a separate program, this is not the case. The identification of the relevant folder (and contained files) is a cardinal step in the autonomous system. This is because students often submit their projects in such a way, that the project folder is nested within various parent directories. If the rest of the autonomous system is to function correctly, the project directory must be identified and its absolute path stored. Moreover, the aforementioned functionality should be maintained regardless of multiple nested directories.
 \\\\
 It can be seen form Figure~\ref{aso} that the functional block discussed in this subsection receives, as inputs, the outputs generated by the program discussed in \textbf{\ref{p1} \nameref{p1}}. Firstly, the mypath\hyperref[listExt]{.py} module is needed to navigate the folder directories on the host machine as saved by the first program. Next, the data\hyperref[listExt]{.csv} file is required to link student repositories with unique identifiers as assigned by the first program. This file will, additionally, be modified by the program discussed in this subsection, to store the absolute path to the pertaining project folder.  
 
@@ -79,9 +79,9 @@ In addition to the data\hyperref[listExt]{.csv} file, this program also receives
 
 \subsection{Autonomous process directory structure}
 \label{p4}
-In the previous subsections, the autonomous process has been outlined. The outputs produced by each of the steps in this process has also been discussed. This subsection will highlight the folder structure produced and utilized by the relevant system. Due to the modular nature of the autonomous system, the outputs of one process are often the inputs to another. Furthermore, the programs have been written in such a way that multiple executions of a single process are often necessitated.
+In the previous subsections, the autonomous process has been outlined. The outputs produced by each of the steps in this process have also been discussed. This subsection will highlight the folder structure produced and utilized by the relevant system. Due to the modular nature of the autonomous system, the outputs of one process are often the inputs to another. Furthermore, the programs have been written in such a way that multiple executions of a single process are often necessitated.
 \\\\
-It therefore becomes necessary to store these outputs and inputs in a common directory, to be accessed by any iteration of the various steps in the process. The figure below illustrates these directories.
+It therefore, becomes necessary to store these outputs and inputs in a common directory, to be accessed by any iteration of the various steps in the process. The figure below illustrates these directories.
 
 \begin{figure}[H]
 \begin{center}
@@ -97,11 +97,11 @@ Figure~\ref{dir} illustrates the two directories produced by the autonomous proc
 \begin{center}
 \includegraphics[width = 140mm]{stdRepos.png}
 \caption{Content of the stdRepos folder}
-\label{stdRepos}
+\label{stdRepos12}
 \end{center}
 \end{figure}
 
-Figure~\ref{stdRepos} depicts the content of the stdRepos folder, after the program discussed in \textbf{\ref{p1} \nameref{p1}}, has executed.
+Figure~\ref{stdRepos12} depicts the content of the "stdRepos" folder, after the program discussed in \textbf{\ref{p1} \nameref{p1}}, has executed.
 \\\\
 In addition to the previously discussed repository a "data" repository is also created by the process in discussion. This repository will serve as a common storage location for any programs that form part of the system. Within this directory the output files of the final step are stored, as well as the required python modules created by the system. The contents of the "data" folder are partially displayed in the following figure:
 
@@ -109,10 +109,10 @@ In addition to the previously discussed repository a "data" repository is also c
 \begin{center}
 \includegraphics[width = 155mm]{data.png} 
 \caption{Content of the data folder}
-\label{data}
+\label{data23}
 \end{center}
 \end{figure}
 
-Figure~\ref{data} depicts the content of the data folder, after all the programs discussed in \textbf{\ref{aso} \nameref{aso}}, has executed. It can be seen that the pertaining python modules (namely mypath\hyperref[listExt]{.py} and ds\hyperref[listExt]{.py}) as well as the data\hyperref[listExt]{.csv} is contained within this repository. In addition to these files, the various student structures are also stored in this folder as illustrated in \textbf{\ref{3res} \nameref{3res}}. The various functional blocks depicted in Figure~\ref{stdRepos}, will have access to the respective directories using the mypath\hyperref[listExt]{.py} module in the "data" directory.
+Figure ~\ref{data23} depicts the content of the data folder, after all the programs discussed in \textbf{\ref{aso} \nameref{aso}}, have executed. It can be seen that the pertaining python modules (namely mypath\hyperref[listExt]{.py} and ds\hyperref[listExt]{.py}) as well as the data\hyperref[listExt]{.csv} is contained within this repository. In addition to these files, the various student structures are also stored in this folder as illustrated in \textbf{\ref{3res} \nameref{3res}}. The various functional blocks depicted in Figure~\ref{stdRepos}, will have access to the respective directories using the mypath\hyperref[listExt]{.py} module in the "data" directory.
 \\\\
 This subsection concludes the outline of the autonomous system and provides a general overview of the system. In the following chapter each of the functional blocks discussed in \textbf{\ref{p1} \nameref{p1}}, \textbf{\ref{p2} \nameref{p2}} and \textbf{\ref{p3} \nameref{p3}} will be expanded upon.
