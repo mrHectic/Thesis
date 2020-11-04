@@ -31,6 +31,16 @@ The second objective of this project has thus been met. The problem statement ha
 
 \section{Recommendations}
 
-\color{green} I am not sure what to put into this section Dr Barnard ro we\color{black}
+As described in \textbf{\ref{scOfWrk} \nameref{scOfWrk}}, and as a result of the limited time available for this project, certain constraints had to be introduced. For future work, in addressing the topic at hand, it is recommended that some of these limitations are lifted. 
+\\\\
+Firstly, it is of note that the list of supported MCUs for various emulators will change over time. It is, therefore, recommended that future projects in a similar vain to this one, re-assess the list of supported MCUs for the various emulators. Of particular interest is the planned future support of the STM32 Nucleo range by the xPack Arm QEMU Project. In conjunction with the aforementioned, it is recommended that the other emulators mentioned in this project, be further investigated as time passes and development continues.
+\\\\
+In addition, the chosen functionality to recreate in the emulator involved a flashing LED. It was indeed outside the scope of this project to recreate more advanced functionalities within the described frameworks of \textbf{\nameref{2emul}}. More functionality can thus be introduced by future endeavours (given that solutions supporting more peripherals are discovered).
+\\\\
+It can be seen from \textbf{\ref{codRes} \nameref{codRes}}, that a simple terminal is used to guide the user in the process of autonomous code evaluation. This was done to facilitate the process of automation, but required some manual interaction by the user. It is hence recommended, for the sake of automation, that future projects reduce the extent of these manual interactions. This can be done using a GUI or an autonomous execution chain.
+\\\\
+Furthermore, the evaluation of student code is limited in this project. Evaluation occurred for pin and clock configurations exclusively due to time and scope constraints. It is recommended that succeeding investigations extend the scope of the evaluation to include further configurations (like UART). 
+\\\\
+Lastly, this project addressed the problem statement in a two-part, mutually exclusive way. The investigation of the emulator was not dependant on, nor relevant to, the evaluated code. A future project might, therefore, consider recreating student MCU functionality on a chosen emulator in its totality. Implementing the aforementioned functionality is, indeed, a very extensive task and should perhaps be the topic of an entire project.
 
 
